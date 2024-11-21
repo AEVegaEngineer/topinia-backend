@@ -1,0 +1,25 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "rootDir": ".",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "es2015",
+    "module": "esnext",
+    "lib": ["es2017", "dom"],
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@trin-backend/common-library": ["libs/common-library/src/index.ts"],
+      "@trin-backend/factories/crm": ["libs/factories/crm/src/index.ts"],
+      "@trin-backend/factories/orders": ["libs/factories/orders/src/index.ts"],
+      "@trin-backend/factories/stores": ["libs/factories/stores/src/index.ts"]
+    }
+  },
+  "exclude": ["node_modules", "tmp"]
+}

@@ -1,0 +1,67 @@
+{
+  "root": "src/opinion-management-service",
+  "name": "orders-management-service",
+  "sourceRoot": "src/opinion-management-service/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "dependsOn": ["^build"],
+      "inputs": ["production", "^production"],
+      "cache": true,
+      "executor": "@nx/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/src/opinion-management-service",
+        "main": "src/opinion-management-service/src/main.ts",
+        "tsConfig": "src/opinion-management-service/tsconfig.app.json",
+        "assets": ["src/opinion-management-service/src/assets"],
+        "target": "node",
+        "compiler": "tsc",
+        "webpackConfig": "webpack.config.js",
+        "sourceMap": true
+      },
+      "configurations": {
+        "production": {
+          "optimization": true,
+          "extractLicenses": true,
+          "inspect": false,
+          "fileReplacements": [
+            {
+              "replace": "src/opinion-management-service/src/environments/environment.ts",
+              "with": "src/opinion-management-service/src/environments/environment.prod.ts"
+            }
+          ]
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nx/js:node",
+      "options": {
+        "buildTarget": "orders-management-service:build"
+      }
+    },
+    "lint": {
+      "cache": true,
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["src/opinion-management-service/**/*.ts"]
+      }
+    },
+    "test": {
+      "cache": true,
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/src/opinion-management-service"],
+      "options": {
+        "jestConfig": "src/opinion-management-service/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "version": {
+      "executor": "@jscutlery/semver:version",
+      "options": {
+        "preset": "conventional"
+      }
+    }
+  }
+}
