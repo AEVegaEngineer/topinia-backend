@@ -1,6 +1,9 @@
-import { Controller, Post, Body } from '@nestjs/common';
+import { Controller, Post, Body, Put } from '@nestjs/common';
 import { OpinionService } from './opinion.service';
-import { CreateTopicDto } from 'src/opinion-management-service/src/topics/dto/create-topic.dto';
+import {
+  CreateTopicDto,
+  UpdateTopicDto,
+} from 'src/opinion-management-service/src/topics/dto/index';
 
 @Controller('opinion')
 export class OpinionController {
@@ -11,5 +14,8 @@ export class OpinionController {
     return this.opinionService.createTopic(createTopicDto);
   }
 
-  // ... other endpoints
+  @Put('topic')
+  async updateTopic(@Body() updateTopicDto: UpdateTopicDto) {
+    return this.opinionService.updateTopic(updateTopicDto);
+  }
 }

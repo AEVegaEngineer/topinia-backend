@@ -9,6 +9,6 @@ export class OpinionManagementServiceService {
   }
 
   updateTopic(updateTopicDto: UpdateTopicDto) {
-    return 'This action adds a new Topic';
+    return 'This action updates a Topic';
   }
 }
