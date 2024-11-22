@@ -1,7 +1,7 @@
 {
-  "root": "src/opinion-management-service",
-  "name": "opinion-management-service",
-  "sourceRoot": "src/opinion-management-service/src",
+  "root": "src/apigateway",
+  "name": "apigateway",
+  "sourceRoot": "src/apigateway/src",
   "projectType": "application",
   "targets": {
     "build": {
@@ -11,9 +11,9 @@
       "executor": "@nx/webpack:webpack",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/src/opinion-management-service",
-        "main": "src/opinion-management-service/main.ts",
-        "tsConfig": "src/opinion-management-service/tsconfig.app.json",
+        "outputPath": "dist/src/apigateway",
+        "main": "src/apigateway/main.ts",
+        "tsConfig": "src/apigateway/tsconfig.app.json",
         "target": "node",
         "compiler": "tsc",
         "webpackConfig": "webpack.config.js",
@@ -26,8 +26,8 @@
           "inspect": false,
           "fileReplacements": [
             {
-              "replace": "src/opinion-management-service/src/environments/environment.ts",
-              "with": "src/opinion-management-service/src/environments/environment.prod.ts"
+              "replace": "src/apigateway/src/environments/environment.ts",
+              "with": "src/apigateway/src/environments/environment.prod.ts"
             }
           ]
         }
@@ -36,7 +36,7 @@
     "serve": {
       "executor": "@nx/js:node",
       "options": {
-        "buildTarget": "opinion-management-service:build"
+        "buildTarget": "apigateway:build"
       }
     },
     "lint": {
@@ -44,15 +44,15 @@
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["src/opinion-management-service/**/*.ts"]
+        "lintFilePatterns": ["src/apigateway/**/*.ts"]
       }
     },
     "test": {
       "cache": true,
       "executor": "@nx/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/src/opinion-management-service"],
+      "outputs": ["{workspaceRoot}/coverage/src/apigateway"],
       "options": {
-        "jestConfig": "src/opinion-management-service/jest.config.ts",
+        "jestConfig": "src/apigateway/jest.config.ts",
         "passWithNoTests": true
       }
     },

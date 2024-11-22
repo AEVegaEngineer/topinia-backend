@@ -18,3 +18,8 @@ To run this project:
 ```
 
 5. run the project `npm run start:dev`
+
+## Production builds
+
+- In the file project.json, you can find the configuration for the production build. Specifically beware of the `build.configurations.production mappings`.
+- Make sure to deploy the microservices first and then the API Gateway

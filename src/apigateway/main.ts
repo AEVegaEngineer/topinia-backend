@@ -1,28 +1,19 @@
 import { NestFactory } from '@nestjs/core';
-import { MicroserviceOptions, Transport } from '@nestjs/microservices';
 import { AppModule } from './app.module';
+import { Logger } from '@nestjs/common';
 
-const IS_LOCAL_ENVIRONMENT = process.env.ENV_NAME === 'local';
+const logger = new Logger('APIGateway');
+const API_GATEWAY_PORT = 4000;
+const OPINION_SERVICE_PORT = 3001;
 
 async function bootstrap() {
-  if (IS_LOCAL_ENVIRONMENT) {
-    const app = await NestFactory.create(AppModule);
-    await app.listen(4001);
-    const hosted = await app.getUrl();
-    console.debug('\x1b[0m', `available at:${hosted}`);
-    return;
-  } else {
-    const ms = await NestFactory.createMicroservice<MicroserviceOptions>(
-      AppModule,
-      {
-        transport: Transport.TCP,
-        options: {
-          host: 'localhost',
-          port: 3001,
-        },
-      },
-    );
-    await ms.listen();
-  }
+  const app = await NestFactory.create(AppModule);
+  await app.listen(API_GATEWAY_PORT, '0.0.0.0');
+  logger.log(
+    `API Gateway is available at: ${await app.getUrl()}, PORT:${API_GATEWAY_PORT}`,
+  );
+  logger.log(
+    `Connected to Opinion Management Service on localhost:${OPINION_SERVICE_PORT}`,
+  );
 }
 bootstrap();

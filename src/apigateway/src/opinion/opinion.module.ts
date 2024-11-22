@@ -10,7 +10,7 @@ import { OpinionService } from './opinion.service';
         name: 'OPINION_SERVICE',
         transport: Transport.TCP,
         options: {
-          host: 'localhost',
+          host: '127.0.0.1',
           port: 3001,
         },
       },

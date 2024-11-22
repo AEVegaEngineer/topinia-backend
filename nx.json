@@ -5,7 +5,8 @@
     "build": {
       "dependsOn": ["^build"],
       "inputs": ["production", "^production"],
-      "cache": true
+      "cache": true,
+      "outputs": ["{projectRoot}/dist"]
     },
     "lint": {
       "cache": true
@@ -14,6 +15,18 @@
       "cache": true
     },
     "e2e": {
+      "cache": true
+    },
+    "test:watch": {
+      "cache": true
+    },
+    "test:cov": {
+      "cache": true
+    },
+    "test:debug": {
+      "cache": true
+    },
+    "test:e2e": {
       "cache": true
     }
   },
@@ -29,5 +42,6 @@
         "cacheableOperations": ["build", "lint", "test", "e2e"]
       }
     }
-  }
+  },
+  "nxCloudId": "673f602725a54036e37efa35"
 }
