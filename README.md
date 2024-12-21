@@ -1,4 +1,4 @@
-# Topinion Backend
+# Topinia Backend
 
 ### a project built using nestjs
 
