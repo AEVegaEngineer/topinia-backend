@@ -1,23 +1,23 @@
+import express from 'express';
 import { NestFactory } from '@nestjs/core';
-import { MicroserviceOptions, Transport } from '@nestjs/microservices';
+import { ExpressAdapter } from '@nestjs/platform-express';
 import { AppModule } from './app.module';
 import { Logger } from '@nestjs/common';
 
 const logger = new Logger('OpinionManagementService');
-const PORT = 3001;
+const PORT = 4000;
 
 async function bootstrap() {
-  const app = await NestFactory.createMicroservice<MicroserviceOptions>(
-    AppModule,
-    {
-      transport: Transport.TCP,
-      options: {
-        host: '127.0.0.1', // This allows connections from other machines
-        port: PORT,
-      },
-    },
-  );
-  await app.listen();
-  logger.log(`Opinion Management Service is listening on  127.0.0.1:${PORT}`);
+  const expressApp = express();
+  const adapter = new ExpressAdapter(expressApp);
+  const app = await NestFactory.create(AppModule, adapter);
+
+  if (process.env.ENV_NAME !== 'prod') {
+    await app.listen(PORT);
+    logger.log(`Opinion Management Service is listening on  127.0.0.1:${PORT}`);
+  } else {
+    await app.init();
+  }
 }
+
 bootstrap();

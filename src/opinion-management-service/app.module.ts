@@ -1,11 +1,8 @@
 import { Module } from '@nestjs/common';
 import { OpinionManagementServiceModule } from './src/opinion-management-service.module';
-import { OpinionManagementServiceController } from './src/opinion-management-service.controller';
-import { OpinionManagementServiceService } from './src/opinion-management-service.service';
+import { TopicsModule } from './src/topics/topics.module';
 
 @Module({
-  imports: [OpinionManagementServiceModule],
-  controllers: [OpinionManagementServiceController],
-  providers: [OpinionManagementServiceService],
+  imports: [OpinionManagementServiceModule, TopicsModule],
 })
 export class AppModule {}

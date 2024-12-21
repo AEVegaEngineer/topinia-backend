@@ -1,7 +1,7 @@
-import { Controller } from '@nestjs/common';
-import { MessagePattern, Payload } from '@nestjs/microservices';
+import { Body, Controller, Post, Put } from '@nestjs/common';
 import { OpinionManagementServiceService } from './opinion-management-service.service';
-import { CreateTopicDto as UpdateTopicDto } from './topics/dto/create-topic.dto';
+import { CreateTopicDto } from './topics/dto/create-topic.dto';
+import { UpdateTopicDto } from './topics/dto';
 
 @Controller()
 export class OpinionManagementServiceController {
@@ -9,13 +9,13 @@ export class OpinionManagementServiceController {
     private readonly opinionManagementServiceService: OpinionManagementServiceService,
   ) {}
 
-  @MessagePattern('createTopic')
-  createTopic(@Payload() createTopicDto: UpdateTopicDto) {
+  @Post('createTopic')
+  createTopic(@Body() createTopicDto: CreateTopicDto) {
     return this.opinionManagementServiceService.createTopic(createTopicDto);
   }
 
-  @MessagePattern('updateTopic')
-  updateTopic(@Payload() updateTopicDto: UpdateTopicDto) {
+  @Put('updateTopic')
+  updateTopic(@Body() updateTopicDto: UpdateTopicDto) {
     return this.opinionManagementServiceService.updateTopic(updateTopicDto);
   }
 }

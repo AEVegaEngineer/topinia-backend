@@ -19,7 +19,8 @@
       "@trin-backend/factories/crm": ["libs/factories/crm/src/index.ts"],
       "@trin-backend/factories/orders": ["libs/factories/orders/src/index.ts"],
       "@trin-backend/factories/stores": ["libs/factories/stores/src/index.ts"]
-    }
+    },
+    "noEmit": true
   },
   "exclude": ["node_modules", "tmp"]
 }
