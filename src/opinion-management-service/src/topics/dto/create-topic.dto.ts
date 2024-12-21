@@ -1,3 +1,3 @@
 export class CreateTopicDto {
-  title: string;
+  topic_title: string;
 }

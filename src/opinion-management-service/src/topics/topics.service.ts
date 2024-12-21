@@ -16,8 +16,8 @@ export class TopicsService {
     return `This action returns a #${id} topic`;
   }
 
-  update(id: number, updateTopicDto: UpdateTopicDto) {
-    return `This action updates a #${id} topic`;
+  update(updateTopicDto: UpdateTopicDto) {
+    return `This action updates a #${updateTopicDto.topic_id} topic`;
   }
 
   remove(id: number) {

@@ -1,9 +1,16 @@
 import { Module } from '@nestjs/common';
-import { OpinionManagementServiceService } from './opinion-management-service.service';
-import { OpinionManagementServiceController } from './opinion-management-service.controller';
+import { TopicsService } from './topics/topics.service';
+import { TopicOptionsService } from './topic_options/topic-options.service';
+import { OpinionsService } from './opinions/opinions.service';
+import { UsersService } from './users/users.service';
 
 @Module({
-  controllers: [OpinionManagementServiceController],
-  providers: [OpinionManagementServiceService],
+  controllers: [],
+  providers: [
+    TopicsService,
+    UsersService,
+    OpinionsService,
+    TopicOptionsService,
+  ],
 })
 export class OpinionManagementServiceModule {}
