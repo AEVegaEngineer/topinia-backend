@@ -1,0 +1,23 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 14
+  pre_build:
+    commands:
+      - npm install -g nx
+      - npm ci
+  build:
+    commands:
+      - nx run opinion-management-service:build
+  post_build:
+    commands:
+      - cd dist/src/opinion-management-service
+      - zip -r function.zip .
+      - mv function.zip ../../../
+
+artifacts:
+  files:
+    - function.zip
+  name: function.zip
