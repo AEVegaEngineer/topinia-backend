@@ -6,11 +6,6 @@ import { UsersService } from './users/users.service';
 
 @Module({
   controllers: [],
-  providers: [
-    TopicsService,
-    UsersService,
-    OpinionsService,
-    TopicOptionsService,
-  ],
+  providers: [],
 })
 export class OpinionManagementServiceModule {}

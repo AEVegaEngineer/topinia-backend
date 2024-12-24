@@ -4,29 +4,48 @@ import { APIGatewayProxyHandler } from 'aws-lambda';
 import serverlessExpress from '@vendia/serverless-express';
 import { ExpressAdapter } from '@nestjs/platform-express';
 import express from 'express';
+import { Logger } from '@nestjs/common';
+
+const logger = new Logger('Main');
 
 let cachedServer: any;
 
 async function bootstrap() {
-  if (!cachedServer) {
-    const expressApp = express();
-    const adapter = new ExpressAdapter(expressApp);
-    const app = await NestFactory.create(AppModule, adapter);
-    await app.init();
+  const expressApp = express();
+  const adapter = new ExpressAdapter(expressApp);
+  const app = await NestFactory.create(AppModule, adapter);
+  await app.init();
 
-    cachedServer = serverlessExpress({ app: expressApp });
-  }
-  return cachedServer;
+  return app;
 }
 
 export const handler: APIGatewayProxyHandler = async (event, context) => {
-  console.log('Lambda function invoked');
-  console.log('Event:', JSON.stringify(event));
+  logger.log(`Event: ${JSON.stringify(event)}`);
 
   context.callbackWaitsForEmptyEventLoop = false;
 
-  const server = await bootstrap();
-  console.log('Server bootstrapped');
+  if (!cachedServer) {
+    const app = await bootstrap();
+    cachedServer = serverlessExpress({
+      app: app.getHttpAdapter().getInstance(),
+    });
+  }
 
-  return server(event, context);
+  logger.log('Server bootstrapped');
+
+  return cachedServer(event, context);
 };
+
+// For local development
+if (process.env.NODE_ENV !== 'production') {
+  (async () => {
+    try {
+      const app = await bootstrap();
+      const port = process.env.OPINION_MANAGEMENT_SERVICE_PORT || 4000;
+      await app.listen(port);
+      logger.log(`Application is running on: http://localhost:${port}`);
+    } catch (error) {
+      logger.error('Error starting server', error);
+    }
+  })();
+}
