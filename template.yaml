@@ -1,6 +1,25 @@
+# sam build
+# sam local start-api
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Resources:
+  OpinionManagementFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: ./dist/src/opinion-management-service/
+      Handler: main.handler
+      Runtime: nodejs18.x
+      Timeout: 30
+      MemorySize: 256
+      Events:
+        ApiEvent:
+          Type: Api
+          Properties:
+            Path: /{proxy+}
+            # Path: /
+            Method: ANY
+            Auth:
+              Authorizer: NONE
   LambdaFunction:
     Type: AWS::Serverless::Function
     Properties:

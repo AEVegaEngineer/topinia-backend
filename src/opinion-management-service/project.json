@@ -1,7 +1,8 @@
 {
   "root": "src/opinion-management-service",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "name": "opinion-management-service",
-  "sourceRoot": "src/opinion-management-service/src",
+  "sourceRoot": "src/opinion-management-service",
   "projectType": "application",
   "targets": {
     "build": {
@@ -17,7 +18,9 @@
         "target": "node",
         "compiler": "tsc",
         "webpackConfig": "webpack.config.js",
-        "sourceMap": true
+        "sourceMap": true,
+        "generatePackageJson": true,
+        "isolatedConfig": true
       },
       "configurations": {
         "production": {

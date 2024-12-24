@@ -64,3 +64,6 @@ postgres/
 
 .nx/cache
 .nx/workspace-data
+
+.aws-sam
+.aws-sam/**
