@@ -5,7 +5,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       FunctionName: !Ref LambdaFunctionName
-      Handler: main.handler
+      Handler: lambda.handler
       Runtime: nodejs18.x
       CodeUri: function.zip
       Events:
