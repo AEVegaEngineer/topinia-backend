@@ -1,9 +1,8 @@
 version: 0.2
-
 phases:
   install:
     runtime-versions:
-      nodejs: 14
+      nodejs: 18
   pre_build:
     commands:
       - npm install -g nx
@@ -13,11 +12,12 @@ phases:
       - nx run opinion-management-service:build
   post_build:
     commands:
+      - cp template.yaml dist/src/opinion-management-service/
       - cd dist/src/opinion-management-service
-      - zip -r function.zip .
-      - mv function.zip ../../../
-
+      - zip -r ../../../function.zip .
+      - cd ../../..
 artifacts:
   files:
     - function.zip
-  name: function.zip
+    - template.yaml
+  name: build_output

@@ -1,0 +1,20 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Resources:
+  LambdaFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Ref LambdaFunctionName
+      Handler: main.handler
+      Runtime: nodejs18.x
+      CodeUri: function.zip
+      Events:
+        ApiEvent:
+          Type: Api
+          Properties:
+            Path: /
+            Method: ANY
+Parameters:
+  LambdaFunctionName:
+    Type: String
+    Description: Name of the Lambda function
