@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { UserInterest } from '../../user_interest/entities/user-interest.entity';
 
 @Entity({ name: 'interest' })
 export class Interest {
@@ -9,7 +10,7 @@ export class Interest {
     uniqueItems: true,
   })
   @PrimaryGeneratedColumn('uuid')
-  interest_id: string;
+  interestId: string;
 
   @ApiProperty({
     example: 'Data Science',
@@ -18,4 +19,7 @@ export class Interest {
   })
   @Column('text')
   interest_name: string;
+
+  @OneToMany(() => UserInterest, (userInterest) => userInterest.interestId)
+  userInterest: UserInterest;
 }
