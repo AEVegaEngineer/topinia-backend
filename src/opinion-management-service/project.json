@@ -2,7 +2,7 @@
   "root": "src/opinion-management-service",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "name": "opinion-management-service",
-  "sourceRoot": "src/opinion-management-service",
+  "sourceRoot": "src/opinion-management-service/src",
   "projectType": "application",
   "targets": {
     "build": {
