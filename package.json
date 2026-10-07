@@ -1,10 +1,10 @@
 {
   "name": "topinion-backend",
   "version": "0.0.1",
-  "description": "",
-  "author": "",
+  "description": "NestJS and PostgreSQL backend for the Topinion platform",
+  "author": "Andres Vega",
   "private": true,
-  "license": "UNLICENSED",
+  "license": "MIT",
   "scripts": {
     "build": "nest build",
     "build:opinion-management": "nx build opinion-management-service --configuration=production",
@@ -28,7 +28,7 @@
     "@nestjs/common": "^10.0.0",
     "@nestjs/config": "^3.3.0",
     "@nestjs/core": "^10.0.0",
-    "@nestjs/mapped-types": "*",
+    "@nestjs/mapped-types": "^2.0.6",
     "@nestjs/microservices": "^10.4.8",
     "@nestjs/platform-express": "^10.0.0",
     "@nestjs/platform-socket.io": "^10.4.15",
@@ -95,7 +95,12 @@
     "rootDir": "src",
     "testRegex": ".*\\.spec\\.ts$",
     "transform": {
-      "^.+\\.(t|j)s$": "ts-jest"
+      "^.+\\.(t|j)s$": [
+        "ts-jest",
+        {
+          "tsconfig": "src/opinion-management-service/tsconfig.spec.json"
+        }
+      ]
     },
     "collectCoverageFrom": [
       "**/*.(t|j)s"
